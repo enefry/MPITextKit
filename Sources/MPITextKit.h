@@ -21,6 +21,7 @@ FOUNDATION_EXPORT const unsigned char MPITextKitVersionString[];
 #import <MPITextKit/NSAttributedString+MPITextKit.h>
 #import <MPITextKit/NSMutableAttributedString+MPITextKit.h>
 #import <MPITextKit/NSMutableParagraphStyle+MPITextKit.h>
+#import <MPITextKit/MPITextInteractionManager.h>
 #else
 #import "MPILabel.h"
 #import "MPITextParser.h"
@@ -31,6 +32,7 @@ FOUNDATION_EXPORT const unsigned char MPITextKitVersionString[];
 #import "NSAttributedString+MPITextKit.h"
 #import "NSMutableAttributedString+MPITextKit.h"
 #import "NSMutableParagraphStyle+MPITextKit.h"
+#import "MPITextInteractionManager.h"
 #endif
 
 #endif /* MPITextKit_h */
