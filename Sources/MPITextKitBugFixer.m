@@ -73,7 +73,7 @@
 
     // paragraphSpacing
     CGFloat paragraphSpacing = 0;
-    if (paragraphStyle.paragraphSpacing > FLT_EPSILON) {
+    if (paragraphStyle.paragraphSpacing > FLT_EPSILON || paragraphStyle.paragraphSpacing < -FLT_EPSILON) {
         NSRange charaterRange = [layoutManager characterRangeForGlyphRange:NSMakeRange(NSMaxRange(glyphRange) - 1, 1) actualGlyphRange:NULL];
         NSAttributedString *attributedString = [textStorage attributedSubstringFromRange:charaterRange];
         if ([attributedString.string isEqualToString:@"\n"]) {
@@ -85,7 +85,12 @@
     CGRect usedRect = *lineFragmentUsedRect;
 
     CGFloat usedHeight = MAX(maximumLineHeight, usedRect.size.height);
-    rect.size.height = paragraphSpacingBefore + usedHeight + maximumLineSpacing + paragraphSpacing;
+    if (paragraphSpacingBefore < -FLT_EPSILON) {
+        rect.origin.y += paragraphSpacingBefore;
+        rect.size.height = usedHeight + maximumLineSpacing + paragraphSpacing;
+    } else {
+        rect.size.height = paragraphSpacingBefore + usedHeight + maximumLineSpacing + paragraphSpacing;
+    }
     usedRect.size.height = usedHeight;
 
     *lineFragmentRect = rect;
